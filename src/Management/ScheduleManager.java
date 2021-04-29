@@ -6,6 +6,7 @@ import Schedule.AfternoonSchedule;
 import Schedule.MornigSchedule;
 import Schedule.NightSchedule;
 import Schedule.Schedule;
+import Schedule.ScheduleKind;
 
 public class ScheduleManager {
 
@@ -34,7 +35,7 @@ public class ScheduleManager {
 			kind = input.nextInt();
 			//Mornig 인 경우
 			if (kind==1){
-				schedule = new MornigSchedule();  //'MornigSchedule' 객체를 만들어 'schedule'에 저장
+				schedule = new MornigSchedule(ScheduleKind.Mornig);  //'MornigSchedule' 객체를 만들어 'schedule'에 저장
 				schedule.getUserInput(input);  //'getUserIput'함수 실행
 				schedule.setDay(day);  //입력받은 'day'를 저장함
 				schedules.add(schedule);  //'schedules'콜렉션에 'schedule'값 저장
@@ -42,7 +43,7 @@ public class ScheduleManager {
 			}
 			//Afternoon인 경우
 			else if(kind ==2) {
-				schedule = new AfternoonSchedule();
+				schedule = new AfternoonSchedule(ScheduleKind.Afternoon);
 				schedule.getUserInput(input);
 				schedule.setDay(day);
 				schedules.add(schedule);
@@ -50,7 +51,7 @@ public class ScheduleManager {
 			}
 			//Night인 경우
 			else if(kind == 3) {
-				schedule = new NightSchedule();
+				schedule = new NightSchedule(ScheduleKind.Night);
 				schedule.getUserInput(input);
 				schedule.setDay(day);
 				schedules.add(schedule);

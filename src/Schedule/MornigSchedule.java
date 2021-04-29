@@ -3,6 +3,11 @@ package Schedule;
 import java.util.Scanner;
 
 public class MornigSchedule extends Schedule{  //'Schedule' class를 상속 받음
+	
+	public MornigSchedule(ScheduleKind kind) {
+		super(kind);
+	}
+	
 	public void getUserInput(Scanner input) {
 		System.out.println("Schedule : ");
 		String schedule = input.next();  //입력값을 'schedule' 변수에 저장

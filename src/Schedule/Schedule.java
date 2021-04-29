@@ -13,8 +13,13 @@ public class Schedule {
 	//생성자를 만듦
 	public Schedule() {}
 	
+	public Schedule(ScheduleKind kind) {
+		this.kind = kind;
+	}
+	
 	//인자값을 저장하는 생성자를 만듦
-	public Schedule(int day, String schedule, String memo) {
+	public Schedule(ScheduleKind kind, int day, String schedule, String memo) {
+		this.kind = kind;
 		this.day = day;
 		this.schedule = schedule;
 		this.memo = memo;
@@ -55,7 +60,21 @@ public class Schedule {
 
 	//내용을 출력하는 함수
 	public void printInfo(int i) {
-		System.out.println(i+". Day : 20"+this.day+"\tSchedule : "+this.schedule+"\tmemo: "+this.memo);
+		String skind = "none";
+		switch(this.kind) {
+		case Mornig:
+			skind = "Mornig";
+			break;
+		case Afternoon:
+			skind="Afternoon";
+			break;
+		case Night:
+			skind="Night";
+			break;
+		default:
+			break;
+		}
+		System.out.println(i+". kind : " +skind + " Day : 20"+this.day+"\tSchedule : "+this.schedule+"\tmemo: "+this.memo);
 	}
 	
 	//사용자의 입력값을 저장하는 함수
