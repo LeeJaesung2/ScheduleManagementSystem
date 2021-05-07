@@ -2,12 +2,12 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class AfternoonSchedule extends MornigSchedule implements Scheduleinput{
+public class AfternoonSchedule extends MornigSchedule implements Scheduleinput{//'MorningSchedule' class를 상속 받음, 'Scheduleinput'을 implements함
 	
 	public AfternoonSchedule(ScheduleKind kind) {
 		super(kind);
 	}
-
+	//'Scheduleinput' 에 있는 함수를 오버라이드 함
     public void getUserInput(Scanner input) {
 		
 		

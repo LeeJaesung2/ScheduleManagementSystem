@@ -2,11 +2,11 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class EveningSchedule extends Schedule implements Scheduleinput {
+public class EveningSchedule extends Schedule implements Scheduleinput { //'Schedule' class를 상속 받음, 'Scheduleinput'을 implements함
 	public EveningSchedule(ScheduleKind kind) {
 		super(kind);
 	}
-	
+	//'Scheduleinput' 에 있는 함수를 오버라이드 함
 	public int getDay() {
 		return day;
 	}
