@@ -2,12 +2,25 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class NightSchedule extends MornigSchedule implements Scheduleinput{
-	public NightSchedule(ScheduleKind kind) {
+public class EveningSchedule extends Schedule implements Scheduleinput {
+	public EveningSchedule(ScheduleKind kind) {
 		super(kind);
 	}
 	
-    public void getUserInput(Scanner input) {
+	public int getDay() {
+		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
+	}
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+	
+	public void getUserInput(Scanner input) {
 		
 		
 		System.out.println("Schedule : ");
@@ -39,6 +52,26 @@ public class NightSchedule extends MornigSchedule implements Scheduleinput{
 		}
 		
 		
+	}
+	public void printInfo(int i) {
+		String skind = "none";
+		switch(this.kind) {
+		case Mornig:
+			skind = "Mornig";
+			break;
+		case Afternoon:
+			skind="Afternoon";
+			break;
+		case Night:
+			skind="Night";
+			break;
+		case Evening:
+			skind="Evening";
+			break;
+		default:
+			break;
+		}
+		System.out.println(i+". kind : " +skind + " Day : 20"+this.day+"\tSchedule : "+this.schedule+"\tmemo: "+this.memo);
 	}
 
 }

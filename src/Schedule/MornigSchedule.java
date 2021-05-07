@@ -2,13 +2,15 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class MornigSchedule extends Schedule{  //'Schedule' class를 상속 받음
+public class MornigSchedule extends Schedule implements Scheduleinput{  //'Schedule' class를 상속 받음
 	
 	public MornigSchedule(ScheduleKind kind) {
 		super(kind);
 	}
 	
-	public void getUserInput(Scanner input) {
+    public void getUserInput(Scanner input) {
+		
+		
 		System.out.println("Schedule : ");
 		String schedule = input.next();  //입력값을 'schedule' 변수에 저장
 		this.setSchedule(schedule);  //'schedule'값을 'setSchedule'함수를 이용해 'schedule'에 저장
@@ -39,6 +41,26 @@ public class MornigSchedule extends Schedule{  //'Schedule' class를 상속 받음
 		
 		
 	}
+	
+	public void printInfo(int i) {
+		String skind = "none";
+		switch(this.kind) {
+		case Mornig:
+			skind = "Mornig";
+			break;
+		case Afternoon:
+			skind="Afternoon";
+			break;
+		case Night:
+			skind="Night";
+			break;
+		default:
+			break;
+		}
+		System.out.println(i+". kind : " +skind + " Day : 20"+this.day+"\tSchedule : "+this.schedule+"\tmemo: "+this.memo);
+	}
+	
+	
 		
 
 }

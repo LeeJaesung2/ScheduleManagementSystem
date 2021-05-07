@@ -3,15 +3,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Schedule.AfternoonSchedule;
+import Schedule.EveningSchedule;
 import Schedule.MornigSchedule;
 import Schedule.NightSchedule;
 import Schedule.Schedule;
 import Schedule.ScheduleKind;
+import Schedule.Scheduleinput;
 
 public class ScheduleManager {
 
 	Scanner input;
-	ArrayList <Schedule> schedules = new ArrayList<Schedule>();  //'Schedule' 객체를 가리키는 'schedule' 배열을 만듦
+	ArrayList <Scheduleinput> schedules = new ArrayList<Scheduleinput>();  //'Schedule' 객체를 가리키는 'schedule' 배열을 만듦
 	
 	//'input'을 인자로 하는 생성자
 	ScheduleManager(Scanner input){
@@ -26,35 +28,44 @@ public class ScheduleManager {
 		System.out.println("Day : 20XX.XX.XX");
 		int day = input.nextInt();   //입력값을 'day'에 저장함
 		int kind = 0;
-		Schedule schedule;
+		Scheduleinput scheduleinput;
 	    while(kind != 1 && kind != 2 && kind != 3) {  //'kind'를 1,2,3중의 값을 입력받을때까지 실행 
 	    	System.out.println("1. Mornig");
 			System.out.println("2. Afternoon");
-			System.out.println("3. Night");
+			System.out.println("3. Evenig");
+			System.out.println("4. Night");
 			System.out.println("Select Time between 1~3 : ");
 			kind = input.nextInt();
 			//Mornig 인 경우
 			if (kind==1){
-				schedule = new MornigSchedule(ScheduleKind.Mornig);  //'MornigSchedule' 객체를 만들어 'schedule'에 저장
-				schedule.getUserInput(input);  //'getUserIput'함수 실행
-				schedule.setDay(day);  //입력받은 'day'를 저장함
-				schedules.add(schedule);  //'schedules'콜렉션에 'schedule'값 저장
+				scheduleinput = new MornigSchedule(ScheduleKind.Mornig);  //'MornigSchedule' 객체를 만들어 'schedule'에 저장
+				scheduleinput.getUserInput(input);  //'getUserIput'함수 실행
+				scheduleinput.setDay(day);  //입력받은 'day'를 저장함
+				schedules.add(scheduleinput);  //'schedules'콜렉션에 'schedule'값 저장
 				break;
 			}
 			//Afternoon인 경우
 			else if(kind ==2) {
-				schedule = new AfternoonSchedule(ScheduleKind.Afternoon);
-				schedule.getUserInput(input);
-				schedule.setDay(day);
-				schedules.add(schedule);
+				scheduleinput = new AfternoonSchedule(ScheduleKind.Afternoon);
+				scheduleinput.getUserInput(input);
+				scheduleinput.setDay(day);
+				schedules.add(scheduleinput);
+				break;
+			}
+			//Evenig인 경우
+			else if(kind ==3) {
+				scheduleinput = new EveningSchedule(ScheduleKind.Evening);
+				scheduleinput.getUserInput(input);
+				scheduleinput.setDay(day);
+				schedules.add(scheduleinput);
 				break;
 			}
 			//Night인 경우
-			else if(kind == 3) {
-				schedule = new NightSchedule(ScheduleKind.Night);
-				schedule.getUserInput(input);
-				schedule.setDay(day);
-				schedules.add(schedule);
+			else if(kind == 4) {
+				scheduleinput = new NightSchedule(ScheduleKind.Night);
+				scheduleinput.getUserInput(input);
+				scheduleinput.setDay(day);
+				schedules.add(scheduleinput);
 				break;
 			}
 			else {
@@ -95,8 +106,8 @@ public class ScheduleManager {
 		System.out.println("Day : 20XX.XX.XX");
 		int day = input.nextInt();    //수를 입력받아 'day'에 저장함
 		for(int i = 0; i<schedules.size();i++) {  //'collection'의 크기만큼 실행
-			Schedule schedule = schedules.get(i); 
-			if(schedule.getDay() == day) {  //'schedule'의 'day'와 입력받은'day'가 일치하는 경우
+			Scheduleinput scheduleinput = schedules.get(i); 
+			if(scheduleinput.getDay() == day) {  //'schedule'의 'day'와 입력받은'day'가 일치하는 경우
 				int num = -1;
 				while(num!=4) {  //어떤것을 수정할 것인지 입력 받음
 					System.out.println("** Schedule Edit Menu **");
@@ -111,19 +122,19 @@ public class ScheduleManager {
 					if (num == 1 ) {
 						System.out.println("Day : ");
 						int dayedit = input.nextInt();
-						schedule.setDay(dayedit);
+						scheduleinput.setDay(dayedit);
 					}
 					//'schedule'을 수정함
 					else if (num == 2) {
 						System.out.println("Schedule : ");
 						String scheduleedit = input.next();
-						schedule.setSchedule(scheduleedit);
+						scheduleinput.setSchedule(scheduleedit);
 					}
 					//'memo'를 수정함
 					else if (num ==3) {
 						System.out.println("Memo : ");
 						String memo = input.next();
-						schedule.setMemo(memo);
+						scheduleinput.setMemo(memo);
 					}
 					else {
 						continue;

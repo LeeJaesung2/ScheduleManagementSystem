@@ -2,7 +2,7 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class Schedule {
+public abstract class Schedule {
 	
 	
 	protected ScheduleKind kind = ScheduleKind.Mornig;  //'ScheduleKind'class를 생성하고 default 값을 'Mornig'으로 함
@@ -59,23 +59,7 @@ public class Schedule {
 	}
 
 	//내용을 출력하는 함수
-	public void printInfo(int i) {
-		String skind = "none";
-		switch(this.kind) {
-		case Mornig:
-			skind = "Mornig";
-			break;
-		case Afternoon:
-			skind="Afternoon";
-			break;
-		case Night:
-			skind="Night";
-			break;
-		default:
-			break;
-		}
-		System.out.println(i+". kind : " +skind + " Day : 20"+this.day+"\tSchedule : "+this.schedule+"\tmemo: "+this.memo);
-	}
+	public abstract void printInfo(int i);
 	
 	//사용자의 입력값을 저장하는 함수
 	public void getUserInput(Scanner input) {
