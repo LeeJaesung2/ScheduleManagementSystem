@@ -92,7 +92,7 @@ public class ScheduleManager {
 					System.out.println("Select Time between 1~3 : ");
 				}//else문
 	    	}//try 문
-	    	catch(InputMismatchException e){
+	    	catch(InputMismatchException e){  //InputMismatchException이 발생시 다시 입력받음
 	    		System.out.println("Please put an integer between 1 and 4 !");
 				if (input.hasNext()) {
 					input.next();
@@ -163,27 +163,33 @@ public class ScheduleManager {
 			Scheduleinput schedule = schedules.get(i);
 			if(schedule.getDay() == day) {  //'schedule'의 'day'와 입력받은'day'가 일치하는 경우
 				int num = -1;
-				while(num!=4) {  //어떤것을 수정할 것인지 입력 받음
-					showEditMenu();
-					num = input.nextInt();
-					
-					switch(num) {
-					//'day'를 수정함
-					case 1:
-						setScheduleDay(schedule,input);
-						break;
-					//'schedule'을 수정함
-					case 2:
-						setSchedule(schedule,input);
-						break;
-						//'memo'를 수정함
-					case 3:
-						setScheduleMemo(schedule, input);
-						break;
-					default:
-						continue;
-					}
-				}//while
+				try {
+					while(num!=4) {  //어떤것을 수정할 것인지 입력 받음
+						showEditMenu();
+						num = input.nextInt();
+						
+						switch(num) {
+						//'day'를 수정함
+						case 1:
+							setScheduleDay(schedule,input);
+							break;
+						//'schedule'을 수정함
+						case 2:
+							setSchedule(schedule,input);
+							break;
+							//'memo'를 수정함
+						case 3:
+							setScheduleMemo(schedule, input);
+							break;
+						default:
+							continue;
+						}
+					}//while
+				} catch (InputMismatchException e) {
+					System.out.println("Please put an integer between 1 and 3 !");
+					if (input.hasNext()) {
+						input.next();
+				}
 				break;
 			}//if
 		}//for
