@@ -1,6 +1,7 @@
 package Schedule;
 
 import java.util.Scanner;
+
 //각 함수를 정의해둔 인터페이스
 public interface Scheduleinput {
 	
