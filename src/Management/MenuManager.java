@@ -9,13 +9,7 @@ public class MenuManager {
 		ScheduleManager schedulemanager = new ScheduleManager(input);   //'ScheduleManager' 객체를 생성하여 'schedulemamager'변수에 연결하고 input을 인자로 함
 		
 		while (num != 5) {
-			System.out.println("*** Schedule Management System Menu ***");
-			System.out.println("1. Add schedule");
-			System.out.println("2. Delete schedule");
-			System.out.println("3. Edit schedule");
-			System.out.println("4. View schedules");
-			System.out.println("5. Exit schedule");
-			System.out.println("Select one number between 1 ~ 5");
+			showMenu();
 			num = input.nextInt();   //수를 입력받음
 		
 			switch(num) {
@@ -37,6 +31,17 @@ public class MenuManager {
 			}
 		}
 
+	}
+	
+	public static void showMenu() {
+		System.out.println("*** Schedule Management System Menu ***");
+		System.out.println("1. Add schedule");
+		System.out.println("2. Delete schedule");
+		System.out.println("3. Edit schedule");
+		System.out.println("4. View schedules");
+		System.out.println("5. Exit schedule");
+		System.out.println("Select one number between 1 ~ 5");
+		
 	}
 
 }

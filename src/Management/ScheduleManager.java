@@ -26,7 +26,7 @@ public class ScheduleManager {
 		
 		
 		System.out.println("Day : 20XX.XX.XX");
-		int day = input.nextInt();   //입력값을 'day'에 저장함
+		int day = input.nextInt();   //입력값을 'day'에 저장함 
 		int kind = 0;
 		Scheduleinput scheduleinput;
 	    while(kind != 1 && kind != 2 && kind != 3) {  //'kind'를 1,2,3중의 값을 입력받을때까지 실행 
@@ -74,12 +74,19 @@ public class ScheduleManager {
 	    }//while문
 		
 	}//add함수
+	//_____________________________________________________________________________________________________________
 	
 	//'deleteSchedule'함수
 	public void deleteSchedule() {
 		
 		System.out.println("Day : 20XX.XX.XX");
 		int day = input.nextInt();    //수를 입력받아 'day'에 저장함
+		int index = findIndex(day);
+		removefromSchedule(index, day);
+	}
+	
+	//deleteSchedule에 필요한 함수
+	public int findIndex(int day) {
 		int index = -1;
 		for(int i = 0; i<schedules.size();i++) {  //'collection'의 크기만큼 실행
 			if(schedules.get(i).getDay()==day) {  //입력받은 날짜와 일치하는 경우
@@ -88,57 +95,51 @@ public class ScheduleManager {
 			
 			}
 		}
-		
+		return index;
+	}
+	
+	public int removefromSchedule(int index,int day) {
 		if(index>=0) {  //인덱스가 있는경우
 			schedules.remove(index);  //값을 지움
 			System.out.println("the shcdule 20"+day+ " is deleted");
-			
+			return 1;
 		}
 	
 		
 		else
 			System.out.println("The Schedule has not been registered");   //'Schedule' class에 저장되지 않았음을 알림
-
-	}
+		return -1;
 		
+	}
+	//_____________________________________________________________________________________________________________
 	//'editSchedule'함수
 	public void editSchedule() {
 		System.out.println("Day : 20XX.XX.XX");
 		int day = input.nextInt();    //수를 입력받아 'day'에 저장함
 		for(int i = 0; i<schedules.size();i++) {  //'collection'의 크기만큼 실행
-			Scheduleinput scheduleinput = schedules.get(i); 
-			if(scheduleinput.getDay() == day) {  //'schedule'의 'day'와 입력받은'day'가 일치하는 경우
+			Scheduleinput schedule = schedules.get(i);
+			if(schedule.getDay() == day) {  //'schedule'의 'day'와 입력받은'day'가 일치하는 경우
 				int num = -1;
 				while(num!=4) {  //어떤것을 수정할 것인지 입력 받음
-					System.out.println("** Schedule Edit Menu **");
-					System.out.println("1. Edit day");
-					System.out.println("2. Edit Schedule");
-					System.out.println("3. Edit Memo");
-					System.out.println("4. Exit Edit");
-					System.out.println("Select one number between 1~4");
+					showEditMenu();
 					num = input.nextInt();
 					
+					switch(num) {
 					//'day'를 수정함
-					if (num == 1 ) {
-						System.out.println("Day : ");
-						int dayedit = input.nextInt();
-						scheduleinput.setDay(dayedit);
-					}
+					case 1:
+						setScheduleDay(schedule,input);
+						break;
 					//'schedule'을 수정함
-					else if (num == 2) {
-						System.out.println("Schedule : ");
-						String scheduleedit = input.next();
-						scheduleinput.setSchedule(scheduleedit);
-					}
-					//'memo'를 수정함
-					else if (num ==3) {
-						System.out.println("Memo : ");
-						String memo = input.next();
-						scheduleinput.setMemo(memo);
-					}
-					else {
+					case 2:
+						setSchedule(schedule,input);
+						break;
+						//'memo'를 수정함
+					case 3:
+						setScheduleMemo(schedule, input);
+						break;
+					default:
 						continue;
-					}//if
+					}
 				}//while
 				break;
 			}//if
@@ -146,14 +147,40 @@ public class ScheduleManager {
 		
 			
 		
-	}	
+	}			
 	
-    //'viewScheudles'함수
+	//editSchedule에 필요한 함수
+	public void setScheduleDay(Scheduleinput schedule,Scanner input) {
+		System.out.println("Day : ");
+		int dayedit = input.nextInt();
+		schedule.setDay(dayedit);
+	}
+	
+	public void setSchedule(Scheduleinput schedule,Scanner input) {
+		schedule.setSchedule(input);
+	}
+	
+	public void setScheduleMemo(Scheduleinput schedule,Scanner input) {
+		schedule.setMemo(input);
+	}
+	
+	public void showEditMenu() {
+		System.out.println("** Schedule Edit Menu **");
+		System.out.println("1. Edit day");
+		System.out.println("2. Edit Schedule");
+		System.out.println("3. Edit Memo");
+		System.out.println("4. Exit Edit");
+		System.out.println("Select one number between 1~4");
+		
+	}
+	//_____________________________________________________________________________________________________________
+	
+	//'viewScheudles'함수
 	public void viewSchedules() {
 		for(int i = 0; i<schedules.size();i++) {
 			schedules.get(i).printInfo(i);
 		}
-			
+				
 	}
 		
 		

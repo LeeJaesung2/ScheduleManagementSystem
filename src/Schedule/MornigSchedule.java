@@ -2,7 +2,7 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class MornigSchedule extends Schedule implements Scheduleinput{  //'Schedule' class를 상속 받음, 'Scheduleinput'을 implements함
+public class MornigSchedule extends Schedule{  //'Schedule' class를 상속 받음, 'Scheduleinput'을 implements함
 	
 	public MornigSchedule(ScheduleKind kind) {
 		super(kind);
@@ -10,55 +10,41 @@ public class MornigSchedule extends Schedule implements Scheduleinput{  //'Sched
 	//'Scheduleinput' 에 있는 함수를 오버라이드 함
     public void getUserInput(Scanner input) {
 		
+		this.setSchedule(input);  //'schedule'값을 'setSchedule'함수를 이용해 'schedule'에 저장
+		setSchueduleMemoYN(input);
 		
-		System.out.println("Schedule : ");
-		String schedule = input.next();  //입력값을 'schedule' 변수에 저장
-		this.setSchedule(schedule);  //'schedule'값을 'setSchedule'함수를 이용해 'schedule'에 저장
-		
-		char answer = 'X';
+	}
+    
+    public void setSchueduleMemoYN(Scanner input) {
+    	char answer = 'X';
 		while(answer != 'y' && answer != 'Y' && answer != 'n' && answer != 'N') {
 			System.out.println("Do you have anything to memo? (Y/N)");
 			
 			answer = input.next().charAt(0);
 			//'answer'이 Yes인 경우
 			if (answer == 'y' || answer == 'Y') {
-				System.out.println("Memo : ");
-				String memo = input.next();	 //입력값을 'memo'배열에 저장함
-				this.setMemo(memo);  //'memo'값을 'setMemo'함수를 이용해 'memo'에 저장
+				this.setMemo(input);  //'memo'값을 'setMemo'함수를 이용해 'memo'에 저장
 				break;
 			
 			}
 			//'answer'이 No인 경우
 			else if(answer == 'n' || answer == 'N') {
-				this.setMemo(""); //'setMemo'함수에 'memo'값을 공백으로 둠
 				break;
 			}
 			//'answer'이 Yes 나 No가 아닌경우
 			else {
 				System.out.println("Chek your answer");
 			}
-		}
-		
-		
-	}
-	
-	public void printInfo(int i) {
-		String skind = "none";
-		switch(this.kind) {
-		case Mornig:
-			skind = "Mornig";
-			break;
-		case Afternoon:
-			skind="Afternoon";
-			break;
-		case Night:
-			skind="Night";
-			break;
-		default:
-			break;
-		}
+		}	
+    }
+    
+    
+	//Schedule printInfo 함수 오버라이드
+    public void printInfo(int i) {
+		String skind = getKindString();
 		System.out.println(i+". kind : " +skind + " Day : 20"+this.day+"\tSchedule : "+this.schedule+"\tmemo: "+this.memo);
 	}
+
 	
 	
 		
