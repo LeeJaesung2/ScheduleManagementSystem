@@ -2,7 +2,10 @@ package Management;
  import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import log.EventLogger;
+
 public class MenuManager {
+	static EventLogger logger = new EventLogger("log.txt");
 
 	public static void main(String[] args) {
 
@@ -21,15 +24,19 @@ public class MenuManager {
 				switch(num) {
 				case 1:      //수가 1인경우
 					schedulemanager.addSchedule();
+					logger.log("add a Schedule");
 					break;
 				case 2:     //수가 2인 경우
 					schedulemanager.deleteSchedule();
+					logger.log("delete a Schedule");
 					break;
 				case 3:     //수가 3인경우
 					schedulemanager.editSchedule();
+					logger.log("edit a Schedule");
 					break;
 				case 4:     //수가 4인 경우
 					schedulemanager.viewSchedules();
+					logger.log("view a list of Schedule");
 					break;
 				case 5:    //수가 5인경우
 					continue;

@@ -189,6 +189,7 @@ public class ScheduleManager {
 					System.out.println("Please put an integer between 1 and 3 !");
 					if (input.hasNext()) {
 						input.next();
+					}
 				}
 				break;
 			}//if
