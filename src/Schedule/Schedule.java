@@ -1,11 +1,15 @@
 package Schedule;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-import exceptions.DateFormatException;
-
-public abstract class Schedule implements Scheduleinput{
+public abstract class Schedule implements Scheduleinput, Serializable{
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -935315799166355976L;
 	
 	protected ScheduleKind kind = ScheduleKind.Mornig;  //'ScheduleKind'class를 생성하고 default 값을 'Mornig'으로 함
 	protected int day;

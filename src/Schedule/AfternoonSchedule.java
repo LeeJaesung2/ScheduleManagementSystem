@@ -4,6 +4,11 @@ import java.util.Scanner;
 
 public class AfternoonSchedule extends Schedule{//'MorningSchedule' class를 상속 받음, 'Scheduleinput'을 implements함
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5808761588636092093L;
+
 	public AfternoonSchedule(ScheduleKind kind) {
 		super(kind);
 	}

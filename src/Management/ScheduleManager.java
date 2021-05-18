@@ -1,4 +1,5 @@
 package Management;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -7,14 +8,18 @@ import Schedule.AfternoonSchedule;
 import Schedule.EveningSchedule;
 import Schedule.MornigSchedule;
 import Schedule.NightSchedule;
-import Schedule.Schedule;
 import Schedule.ScheduleKind;
 import Schedule.Scheduleinput;
 import exceptions.DateFormatException;
 
-public class ScheduleManager {
+public class ScheduleManager  implements Serializable{
 
-	Scanner input;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 220317111176900069L;
+	
+	transient Scanner input;
 	ArrayList <Scheduleinput> schedules = new ArrayList<Scheduleinput>();  //'Schedule' 객체를 가리키는 'schedule' 배열을 만듦
 	
 	//'input'을 인자로 하는 생성자
