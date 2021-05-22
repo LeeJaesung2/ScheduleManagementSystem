@@ -15,19 +15,19 @@ public class MenuManager implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1810731276601538818L;
-	static EventLogger logger = new EventLogger("log.txt");
+	private static final long serialVersionUID = 1810731276601538818L; //시리얼을 넣어줌
+	static EventLogger logger = new EventLogger("log.txt"); //EventLogger 객체를 생성하고 인자로 파일이름인 log.txt를 넣음
 
 	public static void main(String[] args) {
 
 		Scanner input = new Scanner(System.in);
-		ScheduleManager schedulemanager = getObject("schedulemanager.ser");
-		if(schedulemanager==null) {
+		ScheduleManager schedulemanager = getObject("schedulemanager.ser");//schedulemanager.ser에 저장되어있는 정보를 가져와 schedulemanager에 저장함
+		if(schedulemanager==null) {//schedulemanager이 비어있는 경우
 			schedulemanager = new ScheduleManager(input);   //'ScheduleManager' 객체를 생성하여 'schedulemamager'변수에 연결하고 input을 인자로 함
 		}
 				
 		selectMenu(input, schedulemanager);
-		putObject(schedulemanager,"schedulemanager.ser");
+		putObject(schedulemanager,"schedulemanager.ser");//schedulemanager값을 schedulemanager.ser에 저장
 	}
 	
 	public static void selectMenu(Scanner input,ScheduleManager schedulemanager) {
@@ -35,24 +35,27 @@ public class MenuManager implements Serializable{
 		while (num != 5) {
 			try {
 				showMenu();
+				if(input == null) {
+					input = new Scanner(System.in);
+				}
 				num = input.nextInt();   //수를 입력받음
 			
 				switch(num) {
 				case 1:      //수가 1인경우
 					schedulemanager.addSchedule();
-					logger.log("add a Schedule");
+					logger.log("add a Schedule"); //로그에 추가
 					break;
 				case 2:     //수가 2인 경우
 					schedulemanager.deleteSchedule();
-					logger.log("delete a Schedule");
+					logger.log("delete a Schedule");//로그에 추가
 					break;
 				case 3:     //수가 3인경우
 					schedulemanager.editSchedule();
-					logger.log("edit a Schedule");
+					logger.log("edit a Schedule");//로그에 추가
 					break;
 				case 4:     //수가 4인 경우
 					schedulemanager.viewSchedules();
-					logger.log("view a list of Schedule");
+					logger.log("view a list of Schedule");//로그에 추가
 					break;
 				case 5:    //수가 5인경우
 					continue;
@@ -83,14 +86,15 @@ public class MenuManager implements Serializable{
 		
 	}
 	
+	//객체정보가 들어있는 파일을 가져오는 함수
 	public static ScheduleManager getObject(String filename) {
 		ScheduleManager schedulemanager = null;
 		
 		try {
-			FileInputStream file = new FileInputStream(filename);
-			ObjectInputStream in = new ObjectInputStream(file);
+			FileInputStream file = new FileInputStream(filename); //파일을 가져올수 있는 객체를 생성함
+			ObjectInputStream in = new ObjectInputStream(file);//파일을 object단위로 가져올 수 있는 객체를 생성함
 			
-			schedulemanager=(ScheduleManager) in.readObject();
+			schedulemanager=(ScheduleManager) in.readObject();//객체를 가져와 schedulmanage에 넣음
 			in.close();
 			file.close();
 		} catch (FileNotFoundException e) {
@@ -102,16 +106,17 @@ public class MenuManager implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return schedulemanager;
+		return schedulemanager;//schedulemangager을 리턴해줌
 
 	}
 	
+	//입력받은 객체를 파일에 입력하여 저장하는 함수
 	public static void putObject(ScheduleManager schedulemanager, String filename) {
 		try {
-			FileOutputStream file = new FileOutputStream(filename);
-			ObjectOutputStream out = new ObjectOutputStream(file);
+			FileOutputStream file = new FileOutputStream(filename,true);//파일을 입력할수 있는 객체를 생성함
+			ObjectOutputStream out = new ObjectOutputStream(file);//파일을 object단위로 저장할 수 있는 객체를 생성함
 			
-			out.writeObject(schedulemanager);
+			out.writeObject(schedulemanager);//schedulemanager을 입력함
 			
 			out.close();
 			file.close();

@@ -17,17 +17,21 @@ public class ScheduleManager  implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 220317111176900069L;
+	private static final long serialVersionUID = 220317111176900069L;//시리얼을 넣어줌
 	
-	transient Scanner input;
+	transient Scanner input; //null 값
 	ArrayList <Scheduleinput> schedules = new ArrayList<Scheduleinput>();  //'Schedule' 객체를 가리키는 'schedule' 배열을 만듦
 	
-	//'input'을 인자로 하는 생성자
+//	'input'을 인자로 하는 생성자
 	ScheduleManager(Scanner input){
 		this.input= input;
 	}
 	
+	
 	public int dayinput() throws DateFormatException{ //DateFromatException에러 조건을 만들어줌
+		if(input == null) {
+			input = new Scanner(System.in);
+		}
 		int day = input.nextInt();
 		int length = (int)(Math.log10(day)+1);
 		if(length != 6) {
@@ -60,6 +64,9 @@ public class ScheduleManager  implements Serializable{
 				System.out.println("3. Evenig");
 				System.out.println("4. Night");
 				System.out.println("Select Time between 1~4 : ");
+				if(input == null) {
+					input = new Scanner(System.in);
+				}
 				kind = input.nextInt();
 				//Mornig 인 경우
 				if (kind==1){
