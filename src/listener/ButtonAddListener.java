@@ -12,7 +12,7 @@ import gui.WindowFrame;
 public class ButtonAddListener implements ActionListener {
 	
 	WindowFrame frame;
-
+	//frame을 받아오는 생성자
 	public ButtonAddListener(WindowFrame frame) {
 		this.frame = frame;
 	}
