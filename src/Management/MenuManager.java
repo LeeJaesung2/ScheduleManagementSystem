@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import gui.WindowFrame;
 import log.EventLogger;
 
 public class MenuManager implements Serializable{
@@ -25,7 +26,8 @@ public class MenuManager implements Serializable{
 		if(schedulemanager==null) {//schedulemanager이 비어있는 경우
 			schedulemanager = new ScheduleManager(input);   //'ScheduleManager' 객체를 생성하여 'schedulemamager'변수에 연결하고 input을 인자로 함
 		}
-				
+
+		WindowFrame frame = new WindowFrame(schedulemanager);
 		selectMenu(input, schedulemanager);
 		putObject(schedulemanager,"schedulemanager.ser");//schedulemanager값을 schedulemanager.ser에 저장
 	}

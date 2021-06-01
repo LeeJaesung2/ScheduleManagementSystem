@@ -8,6 +8,7 @@ import Schedule.AfternoonSchedule;
 import Schedule.EveningSchedule;
 import Schedule.MornigSchedule;
 import Schedule.NightSchedule;
+import Schedule.Schedule;
 import Schedule.ScheduleKind;
 import Schedule.Scheduleinput;
 import exceptions.DateFormatException;
@@ -279,6 +280,13 @@ public class ScheduleManager  implements Serializable{
 		}
 				
 	}
+	
+	public int size() {
+		return schedules.size();
+	}
 		
+	public Scheduleinput get(int index) {
+		return schedules.get(index);
+	}
 		
 }

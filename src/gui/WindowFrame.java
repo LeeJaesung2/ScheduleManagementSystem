@@ -3,23 +3,28 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Management.ScheduleManager;
+
 public class WindowFrame extends JFrame{
+	
+	ScheduleManager schedulemanager;
 	
 	MenuSelection menuselection;
 	ScheduleAdder scheduleadder;
 	ScheduleViewer scheduleViewer;
-	
 
-	public WindowFrame() {
-		this.menuselection = new MenuSelection(this);
-		this.scheduleadder = new ScheduleAdder(this);
-		this.scheduleViewer = new ScheduleViewer(this);
+	public WindowFrame(ScheduleManager schedulemanager) {
 		//frame ¼³Á¤
 		this.setSize(500, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		this.schedulemanager = schedulemanager;
+		this.menuselection = new MenuSelection(this);
+		this.scheduleadder = new ScheduleAdder(this);
+		this.scheduleViewer = new ScheduleViewer(this,this.schedulemanager);
+
 		
-		this.setupPanel(menuselection);
+		this.add(menuselection);
 		
 		this.setVisible(true);
 	}
