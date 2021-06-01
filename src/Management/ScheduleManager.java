@@ -19,8 +19,8 @@ public class ScheduleManager  implements Serializable{
 	 */
 	private static final long serialVersionUID = 220317111176900069L;//시리얼을 넣어줌
 	
-	transient Scanner input; //null 값
-	ArrayList <Scheduleinput> schedules = new ArrayList<Scheduleinput>();  //'Schedule' 객체를 가리키는 'schedule' 배열을 만듦
+	transient Scanner input; //scanner는 저장하지 않음
+	ArrayList <Scheduleinput> schedules = new ArrayList<Scheduleinput>();  //'Scheduleinput' 객체를 arraylist로 만듦
 	
 //	'input'을 인자로 하는 생성자
 	ScheduleManager(Scanner input){
@@ -29,15 +29,28 @@ public class ScheduleManager  implements Serializable{
 	
 	
 	public int dayinput() throws DateFormatException{ //DateFromatException에러 조건을 만들어줌
-		if(input == null) {
+		if(input == null) { //input값이 null이면 새로 생성해줌
 			input = new Scanner(System.in);
 		}
 		int day = input.nextInt();
-		int length = (int)(Math.log10(day)+1);
-		if(length != 6) {
+		int length = (int)(Math.log10(day)+1); //입력받은 day의 길이
+		if(length != 6) {//6자리 수가아니면 오류메세지를 던짐
 			throw new DateFormatException();
 		}
 		return day;
+	}
+	
+	public int kindinput() {
+		if(input == null) { //input값이 null이면 새로 생성해줌
+			input = new Scanner(System.in);
+		}
+		System.out.println("1. Mornig");
+		System.out.println("2. Afternoon");
+		System.out.println("3. Evenig");
+		System.out.println("4. Night");
+		System.out.println("Select Time between 1~4 : ");
+		int kind = input.nextInt();
+		return kind;
 	}
 	
 	
@@ -59,50 +72,38 @@ public class ScheduleManager  implements Serializable{
 		Scheduleinput scheduleinput;
 	    while(kind < 1 || kind > 4) {  //'kind'를 1,2,3중의 값을 입력받을때까지 실행 
 	    	try {
-		    	System.out.println("1. Mornig");
-				System.out.println("2. Afternoon");
-				System.out.println("3. Evenig");
-				System.out.println("4. Night");
-				System.out.println("Select Time between 1~4 : ");
-				if(input == null) {
-					input = new Scanner(System.in);
-				}
-				kind = input.nextInt();
-				//Mornig 인 경우
-				if (kind==1){
-					scheduleinput = new MornigSchedule(ScheduleKind.Mornig);  //'MornigSchedule' 객체를 만들어 'schedule'에 저장
+		    	kind = kindinput();
+		    	
+		    	switch(kind) {
+		    	//Mornig 인 경우
+		    	case 1:
+		    		scheduleinput = new MornigSchedule(ScheduleKind.Mornig);  //'MornigSchedule' 객체를 만들어 'schedule'에 저장
 					scheduleinput.getUserInput(input);  //'getUserIput'함수 실행
 					scheduleinput.setDay(day);  //입력받은 'day'를 저장함
 					schedules.add(scheduleinput);  //'schedules'콜렉션에 'schedule'값 저장
 					break;
-				}
 				//Afternoon인 경우
-				else if(kind ==2) {
-					scheduleinput = new AfternoonSchedule(ScheduleKind.Afternoon);
+		    	case 2:
+		    		scheduleinput = new AfternoonSchedule(ScheduleKind.Afternoon);
 					scheduleinput.getUserInput(input);
 					scheduleinput.setDay(day);
 					schedules.add(scheduleinput);
 					break;
-				}
 				//Evenig인 경우
-				else if(kind ==3) {
-					scheduleinput = new EveningSchedule(ScheduleKind.Evening);
+		    	case 3:
+		    		scheduleinput = new EveningSchedule(ScheduleKind.Evening);
 					scheduleinput.getUserInput(input);
 					scheduleinput.setDay(day);
 					schedules.add(scheduleinput);
 					break;
-				}
 				//Night인 경우
-				else if(kind == 4) {
-					scheduleinput = new NightSchedule(ScheduleKind.Night);
+		    	case 4:
+		    		scheduleinput = new NightSchedule(ScheduleKind.Night);
 					scheduleinput.getUserInput(input);
 					scheduleinput.setDay(day);
 					schedules.add(scheduleinput);
 					break;
-				}
-				else {
-					System.out.println("Select Time between 1~3 : ");
-				}//else문
+		    	}//switch 문
 	    	}//try 문
 	    	catch(InputMismatchException e){  //InputMismatchException이 발생시 다시 입력받음
 	    		System.out.println("Please put an integer between 1 and 4 !");
@@ -128,15 +129,28 @@ public class ScheduleManager  implements Serializable{
 				System.out.println("Day : 20XX.XX.XX");
 			}
 		}
-		int index = findIndex(day);
+		int kindnum = kindinput();
+		String kind = null;
+		switch(kindnum) {
+		case 1:
+			kind = "Mornig";
+		case 2:
+			kind = "Afternoon";
+		case 3:
+			kind = "Evening";
+		case 4:
+			kind = "Night";
+		}
+		int index = findIndex(day, kind);
 		removefromSchedule(index, day);
 	}
 	
 	//deleteSchedule에 필요한 함수
-	public int findIndex(int day) {
+	public int findIndex(int day, String kind) {
 		int index = -1;
 		for(int i = 0; i<schedules.size();i++) {  //'collection'의 크기만큼 실행
-			if(schedules.get(i).getDay()==day) {  //입력받은 날짜와 일치하는 경우
+			Scheduleinput schedule = schedules.get(i);
+			if(schedule.getDay()==day && schedule.getKindString().equals(kind)) {  //입력받은 날짜와 일치하는 경우
 				index = i;  //인덱스 저장
 				break;
 			
@@ -148,7 +162,7 @@ public class ScheduleManager  implements Serializable{
 	public int removefromSchedule(int index,int day) {
 		if(index>=0) {  //인덱스가 있는경우
 			schedules.remove(index);  //값을 지움
-			System.out.println("the shcdule 20"+day+ " is deleted");
+			System.out.println("the shcdule 20"+day+" is deleted");
 			return 1;
 		}
 	
@@ -171,9 +185,22 @@ public class ScheduleManager  implements Serializable{
 				System.out.println("Day : 20XX.XX.XX");
 			}
 		}
+		int kindnum = kindinput();
+		String kind = null;
+		switch(kindnum) {
+		case 1:
+			kind = "Mornig";
+		case 2:
+			kind = "Afternoon";
+		case 3:
+			kind = "Evening";
+		case 4:
+			kind = "Night";
+		}
+		
 		for(int i = 0; i<schedules.size();i++) {  //'collection'의 크기만큼 실행
 			Scheduleinput schedule = schedules.get(i);
-			if(schedule.getDay() == day) {  //'schedule'의 'day'와 입력받은'day'가 일치하는 경우
+			if(schedule.getDay() == day && schedule.getKindString().equals(kind)) {  //'schedule'의 'day'와 입력받은'day'가 일치하는 경우
 				int num = -1;
 				try {
 					while(num!=4) {  //어떤것을 수정할 것인지 입력 받음
