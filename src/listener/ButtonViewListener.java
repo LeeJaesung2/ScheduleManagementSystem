@@ -19,8 +19,8 @@ public class ButtonViewListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//JButton b = (JButton)e.getSource();
-		ScheduleViewer viewer = frame.getScheduleViewer();
-		frame.setupPanel(viewer);
+		ScheduleViewer viewer = frame.getScheduleViewer();//ScheduleViewer객체를 생성
+		frame.setupPanel(viewer);//frame에 viewer panel을 새로 넣음
 
 	}
 

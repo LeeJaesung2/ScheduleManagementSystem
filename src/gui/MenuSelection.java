@@ -27,8 +27,8 @@ public class MenuSelection extends JPanel{
 		JButton button4 = new JButton("View Schedule");
 		JButton button5 = new JButton("Exit Program");
 		
-		button1.addActionListener(new ButtonAddListener(frame));
-		button4.addActionListener(new ButtonViewListener(frame));
+		button1.addActionListener(new ButtonAddListener(frame));//ButtonAddListner를 button1에 추가
+		button4.addActionListener(new ButtonViewListener(frame));//ButtonViewListener를 button4에 추가
 		
 		panel1.add(label);
 		panel2.add(button1);

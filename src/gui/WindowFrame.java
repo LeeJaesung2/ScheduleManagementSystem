@@ -7,7 +7,7 @@ import Management.ScheduleManager;
 
 public class WindowFrame extends JFrame{
 	
-	ScheduleManager schedulemanager;
+	ScheduleManager schedulemanager;//ScheduleManager객체를 생성함
 	
 	MenuSelection menuselection;
 	ScheduleAdder scheduleadder;
@@ -17,21 +17,20 @@ public class WindowFrame extends JFrame{
 		//frame 설정
 		this.setSize(500, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		this.schedulemanager = schedulemanager;
-		this.menuselection = new MenuSelection(this);
-		this.scheduleadder = new ScheduleAdder(this);
-		this.scheduleViewer = new ScheduleViewer(this,this.schedulemanager);
+		this.schedulemanager = schedulemanager;//schedule객체 생성
+		this.menuselection = new MenuSelection(this);//menuSelection객체 생성
+		this.scheduleadder = new ScheduleAdder(this);//scheduleAdder객체 생성
+		this.scheduleViewer = new ScheduleViewer(this,this.schedulemanager);//scheduleViewer객체 생성
 
 		
-		this.add(menuselection);
+		this.add(menuselection);//frame에 menuselection을 넣음
 		
 		this.setVisible(true);
 	}
 	
 	public void setupPanel(JPanel panel) {
-		this.getContentPane().removeAll();
-		this.getContentPane().add(panel);
+		this.getContentPane().removeAll();//패널을 모두 지움
+		this.getContentPane().add(panel);//받아온 패널을 다시 넣음
 		this.revalidate();
 		this.repaint();
 		

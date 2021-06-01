@@ -20,8 +20,8 @@ public class ButtonAddListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//JButton b = (JButton)e.getSource();
-		ScheduleAdder adder = frame.getScheduleadder();
-		frame.setupPanel(adder);
+		ScheduleAdder adder = frame.getScheduleadder();//ScheduleAdder 객체를 생성
+		frame.setupPanel(adder);//fram에 adder panel을 새로 넣음
 
 	}
 
