@@ -12,9 +12,13 @@ public interface Scheduleinput {
 	
 	public void setSchedule(Scanner input);
 	
+	public void setSchedule(String schedule);
+	
 	public String getSchedule();
 	
 	public void setMemo(Scanner input);
+	
+	public void setMemo(String memo);
 	
 	public String getMemo();
 	

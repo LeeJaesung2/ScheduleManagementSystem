@@ -57,6 +57,10 @@ public abstract class Schedule implements Scheduleinput, Serializable{
 		String schedule = input.next();  //입력값을 'schedule'변수에 저장
 		this.schedule = schedule;
 	}
+	public void setSchedule(String schedule){
+		this.schedule = schedule;
+	}
+	
 	//'memo'를 return하는 함수
 	public String getMemo() {
 		return memo;
@@ -67,6 +71,10 @@ public abstract class Schedule implements Scheduleinput, Serializable{
 		String memo = input.next();	 //입력값을 'memo'변수에 저장함
 		this.memo = memo;
 	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
+	
 	
 	public String getKindString() {
 		String skind = "none";

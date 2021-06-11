@@ -19,7 +19,7 @@ public class WindowFrame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.schedulemanager = schedulemanager;//schedule梓端 持失
 		this.menuselection = new MenuSelection(this);//menuSelection梓端 持失
-		this.scheduleadder = new ScheduleAdder(this);//scheduleAdder梓端 持失
+		this.scheduleadder = new ScheduleAdder(this,this.schedulemanager);//scheduleAdder梓端 持失
 		this.scheduleViewer = new ScheduleViewer(this,this.schedulemanager);//scheduleViewer梓端 持失
 
 		

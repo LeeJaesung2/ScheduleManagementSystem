@@ -54,6 +54,15 @@ public class ScheduleManager  implements Serializable{
 		return kind;
 	}
 	
+	public void addSchedule(String day, String kind, String schedule, String memo) {
+		Scheduleinput scheduleinput = new MornigSchedule(ScheduleKind.Mornig);
+		scheduleinput.getUserInput(input);
+		schedules.add(scheduleinput);
+	}
+	
+	public void addSchedule(Scheduleinput scheduleinput) {
+		schedules.add(scheduleinput);
+	}
 	
     //'addSchedule' 함수
 	public void addSchedule() {       
@@ -280,11 +289,11 @@ public class ScheduleManager  implements Serializable{
 		}
 				
 	}
-	
+	//schedules list의 크기를 구하는 함수
 	public int size() {
 		return schedules.size();
 	}
-		
+	//list중 특정 객체를 반환하는 함수	
 	public Scheduleinput get(int index) {
 		return schedules.get(index);
 	}

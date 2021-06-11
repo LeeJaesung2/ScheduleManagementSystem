@@ -27,7 +27,7 @@ public class MenuManager implements Serializable{
 			schedulemanager = new ScheduleManager(input);   //'ScheduleManager' 객체를 생성하여 'schedulemamager'변수에 연결하고 input을 인자로 함
 		}
 
-		WindowFrame frame = new WindowFrame(schedulemanager);
+		WindowFrame frame = new WindowFrame(schedulemanager);//WindowFrame을 실행
 		selectMenu(input, schedulemanager);
 		putObject(schedulemanager,"schedulemanager.ser");//schedulemanager값을 schedulemanager.ser에 저장
 	}
